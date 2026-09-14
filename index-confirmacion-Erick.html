@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XV Años de Erick</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Georgia,"Times New Roman",serif;background:linear-gradient(135deg,#05070d,#101b35,#071020);color:#fff;text-align:center}.wrap{max-width:700px;margin:auto;padding:24px 16px 50px}.card{background:rgba(8,13,27,.92);border:2px solid #c8d0dc;border-radius:24px;padding:28px 20px;margin:18px 0;box-shadow:0 10px 30px rgba(0,0,0,.35)}img{max-width:100%;border-radius:18px;border:2px solid #c8d0dc}h1{font-size:42px;margin:20px 0 4px;color:#e9edf5}h2{font-size:27px;margin:0 0 20px;color:#3f7cff}h3{font-size:25px;color:#dce3ee;margin-top:0}.info{font-size:19px;line-height:1.7}.blue{color:#6d9cff;font-weight:bold}.choice{display:block;margin:10px 0;padding:14px;border:1px solid #8290a8;border-radius:14px;background:#111a2e;cursor:pointer;font-size:18px;text-align:left}.choice input{margin-right:10px;transform:scale(1.2)}label[for="guests"]{display:block;margin:18px 0 8px;font-size:18px}select,input[type="text"]{width:100%;padding:14px;border-radius:12px;border:1px solid #9aa6ba;font-size:17px;background:#fff;color:#111}button{width:100%;padding:16px;margin-top:18px;border:0;border-radius:14px;background:#245fe8;color:white;font-size:19px;font-weight:bold}#result{display:none;margin-top:18px;padding:16px;border-radius:14px;background:#12233f}.small{font-size:14px;color:#bdc6d5;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<img src="IMG_3692.png" alt="Invitación XV Años de Erick">
+<h1>Erick</h1><h2>Mis XV Años</h2>
+<div class="info">
+<div><span class="blue">2 de enero del 2027</span></div>
+<div>Salón Covacha</div><div>Palau, Coahuila, México</div><br>
+<div><b>Cena:</b> 8:00 pm a 9:00 pm</div>
+<div><b>Baile:</b> 9:00 pm a 2:00 am</div><br>
+<div><b>Lluvia de sobres</b></div>
+</div></div>
+
+<div class="card">
+<h3>💙 Confirmación de asistencia</h3>
+<p>¿Nos acompañas a los XV de Erick?</p>
+<input type="text" id="name" placeholder="Tu nombre (opcional)">
+<label class="choice"><input type="radio" name="attendance" value="Sí, ahí estaré">🟢 Sí, ahí estaré</label>
+<label class="choice"><input type="radio" name="attendance" value="No podré asistir">🔴 No podré asistir</label>
+<label for="guests">¿Cuántos invitados serán?</label>
+<select id="guests">
+<option value="1">1 invitado</option><option value="2">2 invitados</option><option value="3">3 invitados</option>
+<option value="4">4 invitados</option><option value="5">5 invitados</option><option value="6">6 invitados</option>
+<option value="7">7 invitados</option><option value="8">8 invitados</option><option value="9">9 invitados</option><option value="10">10 invitados</option>
+</select>
+<button type="button" onclick="confirmar()">Enviar confirmación</button>
+<div id="result"></div>
+<p class="small">Se preparará un mensaje con tu respuesta y el número de invitados para enviarlo por Facebook.</p>
+</div>
+
+<div class="card"><h3>Acompáñanos 💙</h3><p>¡No faltes!</p></div>
+</div>
+<script>
+function confirmar(){
+const name=document.getElementById('name').value.trim()||'Invitado';
+const attendance=document.querySelector('input[name="attendance"]:checked');
+const guests=document.getElementById('guests').value;
+if(!attendance){alert('Por favor selecciona si asistirás o no.');return;}
+const message=`Hola, soy ${name}. Confirmación para los XV de Erick: ${attendance.value}. Seremos ${guests} invitado${guests==1?'':'s'}.`;
+window.confirmationMessage=message;
+const result=document.getElementById('result');
+result.style.display='block';
+result.innerHTML='<b>Tu confirmación quedó preparada:</b><br><br>'+message+'<br><button type="button" onclick="copiarYAbrir()">📘 Copiar mensaje y abrir Facebook</button>';
+}
+function copiarYAbrir(){
+const message=window.confirmationMessage||'';
+if(navigator.clipboard){navigator.clipboard.writeText(message).finally(()=>{window.location.href='https://www.facebook.com/share/1EpCGj2bKB/?mibextid=wwXIfr';});}
+else{window.location.href='https://www.facebook.com/share/1EpCGj2bKB/?mibextid=wwXIfr';}
+}
+</script>
+</body></html>
